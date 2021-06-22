@@ -1,3 +1,40 @@
+# 使用React作為前端
+
+## 使用前端套件 - React
+1. 安裝套件：`npm install -g create-react-app`
+2. 建立專案：`mkdir react-web`
+3. 進入專案：`cd react-web`
+4. 建立react專案：`create-react-app .`
+![](https://i.imgur.com/VdRp8bb.png)
+5. 開啟伺服器：`npm satrt`
+![](https://i.imgur.com/BNYMjJc.png)
+
+
+
+## 更改Port
+
+因為現在前端(專案react-web)占用port 3000，所以要把後端(專案javascript-express)的port改成3001
+1. 將`javascript-express/package.json`裡的script改成`set PORT=3001 && node ./bin/www` (不同系統有差異)
+![](https://i.imgur.com/2Bt4GXf.png)
+2. 在`javascript-express/app.js`裡放入
+```javascript=
+var cors = require('cors'); //放最前面
+app.use(cors());  //放在var app = express();後
+```
+3. 最後可以得到前端為`http://localhost:3000/`，後端則為`http://localhost:3001/`
+
+4. 使用POSTMAN測試前後端有沒有通訊成功
+![](https://i.imgur.com/mjSzRdX.png)
+> 我們之前在後端那邊設了一個
+```javascript=
+router.get('/api/sayHi', function(req, res, next) {
+  res.send('hi');
+});
+```
+> 因此在「前端(3001)」使用「後端(3000)」的API的情況下送了一個request出去，也可以看到從後端response回了一個response回來
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
